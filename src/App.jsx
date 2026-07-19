@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { Sparkles, ArrowUpRight } from 'lucide-react';
 import SearchBar from './components/SearchBar';
 import CategoryFilter from './components/CategoryFilter';
@@ -10,6 +10,10 @@ import { providers, categories, stats } from './data/providers';
 export default function App() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+
+  useEffect(() => {
+    document.title = `AI Provider Explorer — ${stats.totalProviders} Providers, One View`;
+  }, []);
 
   const counts = useMemo(() => {
     const c = { all: providers.length };
@@ -44,6 +48,7 @@ export default function App() {
   }, [search, activeCategory]);
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen">
       {/* Hero Section */}
       <header className="relative pt-12 pb-8 px-4 sm:px-6">
@@ -94,9 +99,9 @@ export default function App() {
       </header>
 
       {/* Search + Filters */}
-      <section className="sticky top-0 z-50 px-4 sm:px-6 py-4 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/[0.04]">
+      <section aria-label="Search and filter providers" className="sticky top-0 z-50 px-4 sm:px-6 py-4 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/[0.04]">
         <div className="max-w-6xl mx-auto space-y-4">
-          <SearchBar value={search} onChange={setSearch} />
+          <SearchBar value={search} onChange={setSearch} count={stats.totalProviders} />
           <CategoryFilter
             active={activeCategory}
             onChange={setActiveCategory}
@@ -108,9 +113,10 @@ export default function App() {
       {/* Provider Grid */}
       <main className="px-4 sm:px-6 py-8">
         <div className="max-w-6xl mx-auto">
+          <h2 className="sr-only">AI providers</h2>
           {/* Results count */}
           <div className="flex items-center justify-between mb-6">
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-400" role="status" aria-live="polite">
               Showing{' '}
               <span className="font-mono text-slate-300">{filtered.length}</span>{' '}
               {filtered.length === 1 ? 'provider' : 'providers'}
@@ -149,7 +155,7 @@ export default function App() {
             >
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-slate-300 mb-2">No providers found</h3>
-              <p className="text-slate-500">Try a different search term or category.</p>
+              <p className="text-slate-400">Try a different search term or category.</p>
             </motion.div>
           )}
         </div>
@@ -158,7 +164,7 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-white/[0.04] py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
+          <div className="flex items-center gap-2 text-sm text-slate-400">
             <span>Built from</span>
             <a
               href="https://opencode.ai/docs/providers"
@@ -170,7 +176,7 @@ export default function App() {
               <ArrowUpRight className="h-3 w-3" />
             </a>
           </div>
-          <div className="flex items-center gap-4 text-xs text-slate-600">
+          <div className="flex items-center gap-4 text-xs text-slate-400">
             <span>{stats.totalProviders} providers</span>
             <span>·</span>
             <span>{categories.length - 1} categories</span>
@@ -180,5 +186,6 @@ export default function App() {
         </div>
       </footer>
     </div>
+    </MotionConfig>
   );
 }

@@ -36,7 +36,9 @@ export default function CategoryFilter({ active, onChange, counts }) {
         return (
           <button
             key={cat.id}
+            type="button"
             onClick={() => onChange(cat.id)}
+            aria-pressed={isActive}
             className={`
               inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
               border transition-all duration-200 cursor-pointer
@@ -46,10 +48,10 @@ export default function CategoryFilter({ active, onChange, counts }) {
               }
             `}
           >
-            {Icon && <Icon className="h-4 w-4" />}
+            {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
             <span>{cat.label}</span>
             {counts[cat.id] !== undefined && (
-              <span className={`text-xs ${isActive ? 'opacity-80' : 'opacity-50'}`}>
+              <span className="text-xs opacity-90">
                 {counts[cat.id]}
               </span>
             )}

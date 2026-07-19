@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { Activity, Layers, Cpu, Globe } from 'lucide-react';
+import { Layers, Cpu, Globe } from 'lucide-react';
 
 export default function StatsBar({ total, filtered, categories }) {
   const stats = [
@@ -12,8 +11,8 @@ export default function StatsBar({ total, filtered, categories }) {
     <div className="flex items-center justify-center gap-6 sm:gap-8">
       {stats.map((stat) => (
         <div key={stat.label} className="flex items-center gap-2 text-sm">
-          <stat.icon className={`h-4 w-4 ${stat.color}`} />
-          <span className="text-slate-500">{stat.label}</span>
+          <stat.icon className={`h-4 w-4 ${stat.color}`} aria-hidden="true" />
+          <span className="text-slate-400">{stat.label}</span>
           <span className="font-mono font-semibold text-slate-200">{stat.value}</span>
         </div>
       ))}
