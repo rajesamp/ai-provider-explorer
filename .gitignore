@@ -1,3 +1,36 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+build
+*.local
+
+# Environment files
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Auth / credentials
+auth.json
+credentials*
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+
+# Secrets
+secrets.json
+secrets.yaml
+*.secret
+*.token
+
 # Logs
 logs
 *.log
@@ -6,11 +39,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +50,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+._*
+
+# Optional npm
+.npmrc
+.yarnrc
+.yarn-error.log
+
+# Test / coverage
+coverage
+.nyc_output
+
+# Misc
+*.tgz
+.cache
+.parcel-cache
