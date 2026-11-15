@@ -1,5 +1,35 @@
 @import "tailwindcss";
 
+/* Self-hosted fonts (SIL OFL 1.1) — see public/fonts/*-LICENSE / *-OFL.txt */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/InterVariable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+}
+
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -134,4 +164,23 @@ body::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Visible keyboard focus for all interactive elements */
+:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Honor reduced-motion: neutralize CSS + framer-motion transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
